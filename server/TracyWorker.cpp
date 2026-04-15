@@ -3563,7 +3563,7 @@ void Worker::InsertLockEvent( LockMap& lockmap, LockEvent* lev, uint64_t thread,
         // elements, and LockEvent::thread is uint8_t. If we exceed 64 unique
         // threads on a single lock, the later `lockmap.range[it->second]`
         // access writes out-of-bounds and corrupts the next LockMap in the
-        // slab. Drop the event (mark invalid) so Write() will skip this lock.
+        // slab. Drop the event by marking the lock invalid so it won't be shown.
         if( lockmap.threadList.size() >= MaxLockThreads )
         {
             lockmap.valid = false;
