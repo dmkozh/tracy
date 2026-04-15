@@ -2,6 +2,7 @@
 #define __TRACYSLAB_HPP__
 
 #include <assert.h>
+#include <cstddef>
 #include <stdint.h>
 #include <vector>
 
