@@ -205,7 +205,9 @@ int main( int argc, char** argv )
             // Relaxed order is sufficient because only this thread ever reads
             // this value.
             s_disconnect.store(false, std::memory_order_relaxed );
-            break;
+            // Don't break: let the while(worker.IsConnected()) loop exit
+            // naturally so that all worker threads finish processing queued
+            // data before we call worker.Write().
         }
 
         lock.lock();
